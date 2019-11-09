@@ -13,7 +13,7 @@ console.log('Promises: Tabs',
 		.get('https://lambda-times-backend.herokuapp.com/topics')
 );
 
-function tabs(obj) {
+function lambdaTabs(a) {
 
 	// ELEMENTS
 	const tTab                      = document.createElement('div');
@@ -22,7 +22,7 @@ function tabs(obj) {
 	tTab.classList.add('tab');
 
 	// CONTENT
-	tTab.textContent                = obj;
+	tTab.textContent                = a;
 
 	return tTab;
 }
@@ -36,7 +36,7 @@ axios
 		console.log('response: topics', topics);
 		// tabEntryPoint.appendChild(tabs(topics));
 		topics.forEach(i => {
-			let ltTopics = tabs(i);
+			let ltTopics = lambdaTabs(i);
 			tabEntryPoint.appendChild(ltTopics);
 		})
 	})
