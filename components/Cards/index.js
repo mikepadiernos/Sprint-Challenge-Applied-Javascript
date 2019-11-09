@@ -70,4 +70,10 @@ axios
 				console.log(ltArticles);
 			})
 		})
+	})
+	.catch(error => {
+		if (error.includes('Network Error')) {
+			console.log('Network Error');
+		}
+		console.log('No Data Returned');
 	});

@@ -17,3 +17,52 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+const images = [
+	'./assets/carousel/mountains.jpeg',
+	'./assets/carousel/computer.jpeg',
+	'./assets/carousel/trees.jpeg',
+	'./assets/carousel/turntable.jpeg'
+];
+
+function lambdaCarousel(a) {
+
+	// CLASSES
+	const carousel                            = document.createElement('div');
+	const clLeftButton                        = document.createElement('div');
+	const clImage                             = document.createElement('img');
+	const clRightButton                       = document.createElement('div');
+
+	// CLASSES
+	carousel.classList.add('carousel');
+	clLeftButton.classList.add('left-button');
+	clRightButton.classList.add('right-button');
+
+	// APPENDS
+	carousel.appendChild(clLeftButton);
+	carousel.appendChild(clImage);
+	carousel.appendChild(clRightButton);
+
+	// CONTENT
+	clLeftButton.textContent                  = `<`;
+	clRightButton.textContent                 = `>`;
+	// clImage.src                               = a;
+
+	images.forEach(a => {
+		console.log('Images', a);
+		clImage.src                             = a;
+	});
+
+	return carousel;
+}
+
+console.log(lambdaCarousel(images));
+// console.log('Images', images);
+
+let carouselContainer                       = document.querySelector('.carousel-container');
+carouselContainer.appendChild(lambdaCarousel(images));
+//
+// images.forEach(image =>{
+// 	let newCarousel = lambdaCarousel(image);
+// 	console.log('Carousel', newCarousel);
+// })
