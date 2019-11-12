@@ -17,3 +17,63 @@
 // </div>
 //
 // Create a card for each of the articles and add the card to the DOM.
+
+function lambdaCards(a) {
+
+	// ELEMENTS
+	const card                          = document.createElement('div');
+	const cardHeadline                  = document.createElement('div');
+	const cardAuthor                    = document.createElement('div');
+	const cardAuthorImgCt               = document.createElement('div');
+	const cardAuthorImg                 = document.createElement('img');
+	const cardBy                        = document.createElement('span');
+
+	// CLASSES
+	card.classList.add('card');
+	cardHeadline.classList.add('headline');
+	cardAuthor.classList.add('author');
+	cardAuthorImgCt.classList.add('img-container');
+
+	// APPENDS
+	card.appendChild(cardHeadline);
+	card.appendChild(cardAuthor);
+	cardAuthor.appendChild(cardAuthorImgCt);
+	cardAuthorImgCt.appendChild(cardAuthorImg);
+	card.appendChild(cardBy);
+
+	// CONTENT
+	cardHeadline.textContent            = a.headline;
+	cardAuthorImg.src                   = a.authorPhoto;
+	cardBy.textContent                  = a.authorName;
+
+	return card;
+}
+
+let cardsContainer                    = document.querySelector('.cards-container');
+
+console.log('Promises: Cards',
+	axios
+		.get('https://lambda-times-backend.herokuapp.com/articles')
+);
+
+axios
+	.get('https://lambda-times-backend.herokuapp.com/articles')
+	.then(response => {
+		const articles = response.data.articles;
+		console.log('response: articles', articles);
+		let arrArticles = Object.keys(articles).map(i => articles[i]);
+		console.log('Array: articles', arrArticles);
+		arrArticles.forEach(array => {
+			array.forEach(article => {
+				let ltArticles = lambdaCards(article);
+				cardsContainer.appendChild(ltArticles);
+				console.log(ltArticles);
+			})
+		})
+	})
+	.catch(error => {
+		if (error.includes('Network Error')) {
+			console.log('Network Error');
+		}
+		console.log('No Data Returned');
+	});
